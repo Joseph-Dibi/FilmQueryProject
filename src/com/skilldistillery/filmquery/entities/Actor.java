@@ -66,11 +66,8 @@ public boolean equals(Object obj) {
 @Override
 public String toString() {
 	StringBuilder builder = new StringBuilder();
-	builder.append("Actor id = ");
-	builder.append(id);
-	builder.append(", First Name = ");
 	builder.append(firstName);
-	builder.append(", Last Name = ");
+	builder.append(" ");
 	builder.append(lastName);
 	return builder.toString();
 }
