@@ -79,6 +79,7 @@ public class FilmQueryApp {
 				System.out.println(film);
 				System.out.println("Categories: " + film.getCategories());
 				System.out.println("Cast: " + film.getActorList());
+				choice = 2;
 			} else
 				choice = 2;
 		}
