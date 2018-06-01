@@ -15,6 +15,8 @@ public class Film {
 	private String rating;
 	private String specialFeatures;
 	private List<Actor> actorList;
+	private List<String> categories;
+	
 	public Film() {		
 	}
 	
@@ -106,9 +108,14 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film " + title + ". Release Year: " + releaseYear + ". Rating: " + rating + ". Language: " + languageId + ".\nDescription: " + description;
+		return "Film ID: " + id + "\nFilm " + title + ". Release Year: " + releaseYear + ". Rating: " + rating + ". Language: " + languageId + ".\nDescription: " + description;
 	}
 
+	public String viewAllDetails() {
+		
+		return "Rental Duration: " + rentalDuration + ". Rental Rate: " + rentalRates + ". Length: " + length + ". Replacement Cost: " + replacementCost + ". Special Features: " + specialFeatures;
+		
+	}
 	public List<Actor> getActorList() {
 		return actorList;
 	}
@@ -191,5 +198,13 @@ public class Film {
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
+	}
+
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
 	}
 }

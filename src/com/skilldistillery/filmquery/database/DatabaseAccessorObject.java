@@ -24,9 +24,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		String pass = "student";
 		Connection conn = DriverManager.getConnection(url, user, pass);
 		String sqltext;
-		sqltext = "SELECT film.id, title, description, release_year, name, rental_duration, rental_rate, length, replacement_cost, rating, special_features FROM film JOIN language ON language.id = language_id WHERE film.id = ?";
+		sqltext = "SELECT film.id, title, description, release_year, language.name, rental_duration, rental_rate, length, replacement_cost, rating, special_features, category.name FROM film JOIN language ON language.id = language_id JOIN film_category ON film.id = category_id JOIN category ON category.id = category_id WHERE film.id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sqltext);
 		stmt.setInt(1, filmId);
+		List<String> categories = new ArrayList<>();
 
 		ResultSet rs = stmt.executeQuery();
 		Film film = new Film();
@@ -42,9 +43,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			double repCost = rs.getDouble(9);
 			String rating = rs.getString(10);
 			String features = rs.getString(11);
-
+			categories.add(rs.getString(12));
 			film = new Film(filmId2, title, desc, releaseYear, lang, rentDur, rate, length, repCost, rating, features,
 					getActorsByFilmId(filmId));
+			film.setCategories(categories);
 		}
 		return film;
 	}
@@ -105,7 +107,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		String pass = "student";
 		Connection conn = DriverManager.getConnection(url, user, pass);
 		String sqltext;
-		sqltext = "SELECT film.id, title, description, release_year, name, rental_duration, rental_rate, length, replacement_cost, rating, special_features FROM film JOIN language ON language.id = language_id WHERE description LIKE ? OR title LIKE ? ";
+		sqltext = "SELECT film.id, title, description, release_year, name, rental_duration, rental_rate, length, replacement_cost, rating, special_features FROM film JOIN language ON language.id = language_id WHERE description LIKE ? OR title LIKE ? ORDER BY film.id ASC";
 		PreparedStatement stmt = conn.prepareStatement(sqltext);
 		stmt.setString(1, "%" + word + "%");
 		stmt.setString(2, "%" + word + "%");

@@ -27,7 +27,7 @@ public class FilmQueryApp {
 	private void launch() throws SQLException {
 		Scanner input = new Scanner(System.in);
 		userMenu(input);
-		//startUserInterface(input);
+		// startUserInterface(input);
 
 		input.close();
 	}
@@ -35,8 +35,7 @@ public class FilmQueryApp {
 	private void userMenu(Scanner input) throws SQLException {
 		int choice = 0;
 		while (choice != 3) {
-			System.out.println(
-					"\nWhat would you like to do?\n1. Look up a film by ID\n2. Look up a film by keyword\n3. Exit");
+			System.out.println("What would you like to do?\n1. Look up a film by ID\n2. Look up a film by keyword\n3. Exit");
 			choice = input.nextInt();
 			input.nextLine();
 			if (choice == 1) {
@@ -61,6 +60,7 @@ public class FilmQueryApp {
 					for (Film film : filmlist) {
 						System.out.println(film);
 						System.out.println("Cast: " + film.getActorList() + "\n");
+
 					}
 				}
 			} else {
@@ -75,12 +75,12 @@ public class FilmQueryApp {
 		while (choice != 2) {
 			System.out.println("Would you like to view the movies full details? \n1. Yes 2. Return to Main Menu");
 			choice = input.nextInt();
-			if (choice == 1 ) {
+			if (choice == 1) {
 				System.out.println(film);
+				System.out.println("Categories: " + film.getCategories());
 				System.out.println("Cast: " + film.getActorList());
-			}
-			else
-			choice = 2;
+			} else
+				choice = 2;
 		}
 	}
 
