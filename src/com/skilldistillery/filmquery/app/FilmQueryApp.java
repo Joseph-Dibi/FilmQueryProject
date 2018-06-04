@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
 import com.skilldistillery.filmquery.entities.Film;
+import com.skilldistillery.filmquery.entities.Inventory;
 
 public class FilmQueryApp {
 
@@ -77,7 +78,7 @@ public class FilmQueryApp {
 		}
 	}
 
-	private void subMenu(Scanner input, Film film) {
+	private void subMenu(Scanner input, Film film) throws SQLException {
 		int choice = 0;
 		while (choice != 2) {
 			System.out.println("Would you like to view the movies full details? \n1. Yes 2. Return to Main Menu");
@@ -86,6 +87,11 @@ public class FilmQueryApp {
 				System.out.println(film);
 				System.out.println("Categories: " + film.getCategories());
 				System.out.println("Cast: " + film.getActorList());
+				System.out.println("Copies of " + film.getTitle());
+				List<Inventory> list = db.getInventoryAndCondition(film.getId());
+				for (Inventory inventory : list) {
+					System.out.println(inventory);
+				}
 				choice = 2;
 			} else
 				choice = 2;

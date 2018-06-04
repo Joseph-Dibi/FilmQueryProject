@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
+import com.skilldistillery.filmquery.entities.Inventory;
 
 class DatabaseAccessTests {
   private DatabaseAccessor db;
@@ -53,6 +54,12 @@ class DatabaseAccessTests {
   void correct_number_of_actors_in_list() throws SQLException {
 	  List<Actor> filmList =db.getActorsByFilmId(55);
 	  assertEquals(5, filmList.size());
+  }
+  
+  @Test
+  void returning_correct_number_of_copies() throws SQLException {
+	  List<Inventory> list = db.getInventoryAndCondition(1);
+	  assertEquals(28, list.size());
   }
 
 }

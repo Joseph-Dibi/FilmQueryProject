@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
+import com.skilldistillery.filmquery.entities.Inventory;
 
 public class DatabaseAccessorObject implements DatabaseAccessor {
 	private static String url = "jdbc:mysql://localhost:3306/sdvid";
@@ -138,4 +139,27 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		return filmList;
 	}
 
+	public List<Inventory> getInventoryAndCondition(int filmId) throws SQLException {
+		String user = "student";
+		String pass = "student";
+		Connection conn = DriverManager.getConnection(url, user, pass);
+		String sqltext;
+		sqltext = "SELECT film.title, media_condition, store_id FROM film JOIN inventory_item on film.id = film_id WHERE film.id = ? order by store_id asc";
+		PreparedStatement stmt = conn.prepareStatement(sqltext);
+		stmt.setInt(1, filmId);
+		ResultSet rs = stmt.executeQuery();
+		List<Inventory> list = new ArrayList<Inventory>();
+		while (rs.next()) {
+			String title = rs.getString(1);
+			String condition = rs.getString(2);
+			int storeId = rs.getInt(3);
+			Inventory movie = new Inventory(condition, storeId, title);
+			list.add(movie);
+			
+		}
+		rs.close();
+		stmt.close();
+		conn.close();
+		return list;
+	}
 }
