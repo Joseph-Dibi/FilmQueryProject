@@ -49,7 +49,6 @@ public class FilmQueryApp {
 					System.out.println("I am sorry, but the film ID you specified is not in our directory.");
 				} else {
 					System.out.println(film);
-					System.out.println("Cast: " + film.getActorList());
 					subMenu(input, film);
 				}
 			} else if (choice == 2) {
@@ -87,14 +86,37 @@ public class FilmQueryApp {
 				System.out.println(film);
 				System.out.println("Categories: " + film.getCategories());
 				System.out.println("Cast: " + film.getActorList());
-				System.out.println("Copies of " + film.getTitle());
 				List<Inventory> list = db.getInventoryAndCondition(film.getId());
-				for (Inventory inventory : list) {
-					System.out.println(inventory);
-				}
-				choice = 2;
-			} else
-				choice = 2;
+				System.out.println("Are you interested in finding a copy? \n1. Yes \n2. No");
+				choice = input.nextInt();
+				input.nextLine();
+				if (choice == 1) {
+					System.out.println(
+							"Would you like to view all copies or a specific store?\n1. Store \n2. All Copies");
+					choice = input.nextInt();
+					input.nextLine();
+					if (choice == 1) {
+						System.out.println("Please enter a store number (1-8).");
+						choice = input.nextInt();
+						input.nextLine();
+						System.out.println("Copies of " + film.getTitle());
+						for (Inventory inventory : list) {
+							if (inventory.getStoreID() == choice) {
+								System.out.println(inventory);
+							}
+						}
+					} else {
+
+						for (Inventory inventory : list) {
+							System.out.println(inventory);
+
+						}
+					}
+
+					choice = 2;
+				} else
+					choice = 2;
+			}
 		}
 	}
 
