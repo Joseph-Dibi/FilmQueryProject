@@ -35,7 +35,8 @@ public class FilmQueryApp {
 	private void userMenu(Scanner input) throws SQLException {
 		int choice = 0;
 		while (choice != 3) {
-			System.out.println("What would you like to do?\n1. Look up a film by ID\n2. Look up a film by keyword\n3. Exit");
+			System.out.println(
+					"What would you like to do?\n1. Look up a film by ID\n2. Look up a film by keyword\n3. Exit");
 			choice = input.nextInt();
 			input.nextLine();
 			if (choice == 1) {
@@ -51,8 +52,14 @@ public class FilmQueryApp {
 					subMenu(input, film);
 				}
 			} else if (choice == 2) {
+				String keyword;
 				System.out.println("Please enter a keyword, we will search the title and description of our films.");
-				String keyword = input.nextLine();
+				keyword = input.nextLine();
+
+				while (keyword.isEmpty()) {
+					System.out.println("Please enter something to search for.");
+					keyword = input.nextLine();
+				}
 				List<Film> filmlist = db.getFilmBySearch(keyword);
 				if (filmlist.isEmpty()) {
 					System.out.println("I am sorry, but the film you specified is not in our directory.");
