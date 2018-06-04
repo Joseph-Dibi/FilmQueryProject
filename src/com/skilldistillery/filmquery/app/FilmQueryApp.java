@@ -86,6 +86,7 @@ public class FilmQueryApp {
 				System.out.println(film);
 				System.out.println("Categories: " + film.getCategories());
 				System.out.println("Cast: " + film.getActorList());
+				System.out.println(film.allInfo());
 				List<Inventory> list = db.getInventoryAndCondition(film.getId());
 				System.out.println("Are you interested in finding a copy? \n1. Yes \n2. No");
 				choice = input.nextInt();

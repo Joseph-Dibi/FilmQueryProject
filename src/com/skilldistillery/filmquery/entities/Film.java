@@ -110,6 +110,10 @@ public class Film {
 	public String toString() {
 		return "Film ID: " + id + "\nFilm " + title + ". Release Year: " + releaseYear + ". Rating: " + rating + ". Language: " + languageId + ".\nDescription: " + description;
 	}
+	
+	public String allInfo() {
+		return "Rental Duration: " + rentalDuration + ". Rental Rates: " + rentalRates + ". Length: " + length + ". Replacement Cost: " + replacementCost + ". Special Features: " + specialFeatures;
+	}
 
 	public String viewAllDetails() {
 		
